@@ -14,6 +14,9 @@ import {
   Save,
   X,
   Loader2,
+  Cloud,
+  HardDrive,
+  ExternalLink,
 } from "lucide-react";
 
 type PostItem = {
@@ -297,16 +300,44 @@ export default function AdminApp() {
           <h1 className="text-lg font-black">
             <span className="text-aurora">LAN ISLAND</span> 后台
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            {mode === "github" ? "GitHub 模式(保存即提交)" : "本地模式(直接写文件)"}
+          <p className="mt-1 flex items-center gap-2 text-xs">
+            {mode === "github" ? (
+              <>
+                <span className="flex items-center gap-1 rounded-full bg-emerald-500/15 px-2.5 py-0.5 font-bold text-emerald-500">
+                  <Cloud size={11} /> GitHub 模式
+                </span>
+                <span className="text-slate-500 dark:text-slate-400">
+                  保存即提交到仓库,约 1 分钟后网站生效
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="flex items-center gap-1 rounded-full bg-amber-500/15 px-2.5 py-0.5 font-bold text-amber-500">
+                  <HardDrive size={11} /> 本地模式
+                </span>
+                <span className="text-slate-500 dark:text-slate-400">
+                  直接写本地文件(线上需配 GITHUB_TOKEN 才能提交)
+                </span>
+              </>
+            )}
           </p>
         </div>
-        <button
-          onClick={logout}
-          className="flex items-center gap-1.5 rounded-xl border border-white/30 px-3 py-2 text-xs font-bold text-slate-500 transition-colors hover:text-rose-500 dark:border-white/10"
-        >
-          <LogOut size={13} /> 退出
-        </button>
+        <div className="flex items-center gap-2">
+          <a
+            href="/"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-1.5 rounded-xl border border-white/30 px-3 py-2 text-xs font-bold text-slate-500 transition-colors hover:text-indigo-500 dark:border-white/10"
+          >
+            <ExternalLink size={13} /> 看网站
+          </a>
+          <button
+            onClick={logout}
+            className="flex items-center gap-1.5 rounded-xl border border-white/30 px-3 py-2 text-xs font-bold text-slate-500 transition-colors hover:text-rose-500 dark:border-white/10"
+          >
+            <LogOut size={13} /> 退出
+          </button>
+        </div>
       </header>
 
       {/* 标签页 */}

@@ -1,6 +1,6 @@
 // components/Footer.tsx — 页脚(服务端组件)
 import Link from "next/link";
-import { Github, Mail } from "lucide-react";
+import { Anchor, Github, Mail } from "lucide-react";
 import { siteConfig } from "@/siteConfig";
 import { daysSince } from "@/lib/posts";
 
@@ -60,12 +60,23 @@ export default function Footer() {
             </>
           )}
         </p>
-        <Link
-          href="/"
-          className="text-xs text-slate-400 transition-colors hover:text-indigo-500 dark:text-slate-500"
-        >
-          回到岛顶 ↑
-        </Link>
+        <div className="flex items-center gap-4 text-xs">
+          <Link
+            href="/"
+            className="text-slate-400 transition-colors hover:text-indigo-500 dark:text-slate-500"
+          >
+            回到岛顶 ↑
+          </Link>
+          {/* 管理入口:低调的锚点,方便自己从首页跳后台 */}
+          <Link
+            href="/admin"
+            title="管理后台"
+            className="flex items-center gap-1 text-slate-300 transition-colors hover:text-indigo-500 dark:text-slate-600 dark:hover:text-indigo-400"
+          >
+            <Anchor size={12} />
+            管理
+          </Link>
+        </div>
       </div>
     </footer>
   );
