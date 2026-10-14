@@ -12,17 +12,17 @@ export const siteConfig = {
   description:
     "LAN ISLAND —— 记录技术、生活与灵感的个人小岛。文章、说说、摄影与项目。",
   /** 站点地址(部署后改成你的正式域名,用于 SEO 与 RSS) */
-  siteUrl: "https://lan-island.vercel.app",
+  siteUrl: "https://moonlan.space",
   /** 作者名 */
-  author: "LAN",
+  author: "兰俊剑",
   /** 头像(可换成本地 /avatar.jpg,放 public 目录) */
   avatarUrl: "https://api.dicebear.com/9.x/glass/svg?seed=LANISLAND",
   /** 个性签名 */
-  bio: "在代码与生活的缝隙里,捡拾发光的碎片。",
+  bio: "Java 后端 / AI 应用。在这里记录技术与踩坑。",
 
   /** 社交链接(留空则不显示) */
   social: {
-    github: "https://github.com",
+    github: "https://github.com/Inspirecc",
     email: "",
     bilibili: "",
     x: "",
