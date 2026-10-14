@@ -1,10 +1,11 @@
 // app/friends/page.tsx — 友链(服务端组件)
 import { HeartHandshake } from "lucide-react";
-import { friends } from "@/data/friends";
+import { getFriends } from "@/lib/data";
 
 export const metadata = { title: "友链" };
 
 export default function FriendsPage() {
+  const friends = getFriends();
   return (
     <div className="flex flex-col gap-6 pb-10">
       <header className="flex items-center gap-3">

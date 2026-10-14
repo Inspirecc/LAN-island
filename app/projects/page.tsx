@@ -1,10 +1,11 @@
 // app/projects/page.tsx — 项目展示(服务端组件)
 import { FolderKanban, Github, Link2 } from "lucide-react";
-import { projects } from "@/data/projects";
+import { getProjects } from "@/lib/data";
 
 export const metadata = { title: "项目" };
 
 export default function ProjectsPage() {
+  const projects = getProjects();
   return (
     <div className="flex flex-col gap-6 pb-10">
       <header className="flex items-center gap-3">

@@ -31,7 +31,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
-    "typescript": "5.9.3"
+    "typescript": "^5.9.2"
   },
   "optionalDependencies": {
     "@next/swc-win32-x64-msvc": "16.2.1"

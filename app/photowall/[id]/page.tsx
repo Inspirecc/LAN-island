@@ -1,12 +1,12 @@
 // app/photowall/[id]/page.tsx — 单本相册(服务端组件 + 客户端灯箱)
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { albums } from "@/data/albums";
+import { getAlbum, getAlbums } from "@/lib/data";
 import PhotoGrid from "@/components/PhotoGrid";
 import BackButton from "@/components/BackButton";
 
 export function generateStaticParams() {
-  return albums.map((a) => ({ id: a.id }));
+  return getAlbums().map((a) => ({ id: a.id }));
 }
 
 export async function generateMetadata({
@@ -15,7 +15,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const album = albums.find((a) => a.id === id);
+  const album = getAlbum(id);
   return { title: album ? album.title : "相册" };
 }
 
@@ -25,7 +25,7 @@ export default async function AlbumPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const album = albums.find((a) => a.id === id);
+  const album = getAlbum(id);
   if (!album) notFound();
 
   return (

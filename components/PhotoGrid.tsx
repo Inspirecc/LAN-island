@@ -6,7 +6,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import type { Photo } from "@/data/albums";
+import type { Photo } from "@/lib/data";
 
 export default function PhotoGrid({ photos }: { photos: Photo[] }) {
   const [active, setActive] = useState<number | null>(null);

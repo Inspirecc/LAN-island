@@ -2,11 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Camera } from "lucide-react";
-import { albums } from "@/data/albums";
+import { getAlbums } from "@/lib/data";
 
 export const metadata = { title: "照片墙" };
 
 export default function PhotowallPage() {
+  const albums = getAlbums();
+
   return (
     <div className="flex flex-col gap-6 pb-10">
       <header className="flex items-center gap-3">
@@ -46,7 +48,7 @@ export default function PhotowallPage() {
       </div>
       {albums.length === 0 && (
         <p className="glass rounded-3xl p-10 text-center text-sm text-slate-400">
-          还没有相册,往 data\albums.ts 里加一个就好了
+          还没有相册,去后台「数据」页添加一本
         </p>
       )}
     </div>
