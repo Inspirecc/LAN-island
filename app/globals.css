@@ -1,0 +1,134 @@
+@import "tailwindcss";
+@import "highlight.js/styles/github-dark.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@plugin "@tailwindcss/typography";
+
+/* ===== 主题变量 ===== */
+:root {
+  --aurora-gradient: linear-gradient(130deg, #24c6dc, #5433ff 41%, #ff0099 76%);
+  --card: rgba(255, 255, 255, 0.42);
+  --card-border: rgba(255, 255, 255, 0.45);
+  --accent-shadow: 0 8px 30px rgba(84, 51, 255, 0.1);
+}
+
+.dark {
+  --card: rgba(15, 23, 42, 0.55);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --accent-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== 基础 ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply text-slate-900 dark:text-slate-100 antialiased;
+  background: #dbe2ec;
+  transition: background-color 0.6s ease, color 0.6s ease;
+  min-height: 100vh;
+}
+
+.dark body {
+  background: #020617;
+}
+
+/* 毛玻璃卡片 */
+.glass {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--accent-shadow);
+}
+
+/* 渐变文字 */
+.text-aurora {
+  background: var(--aurora-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-aurora {
+  background-image: var(--aurora-gradient);
+}
+
+/* ===== 极光背景光斑 ===== */
+.aurora-blob {
+  position: fixed;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+.dark .aurora-blob {
+  opacity: 0.22;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(60px, -40px) scale(1.15); }
+  66% { transform: translate(-40px, 30px) scale(0.9); }
+}
+
+/* 粒子特效 keyframes */
+@keyframes sakura-fall {
+  0% { transform: translate(0, -5vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translate(var(--drift, 0px), 105vh) rotate(360deg); opacity: 0.4; }
+}
+
+@keyframes firefly {
+  0%, 100% { transform: translate(0, 0); opacity: 0.1; }
+  50% { transform: translate(40px, -60px); opacity: 0.9; }
+}
+
+/* ===== 滚动条 ===== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.35);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.7);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(99, 102, 241, 0.35) transparent;
+}
+
+/* ===== 文章排版微调 ===== */
+.prose {
+  --tw-prose-links: #6366f1;
+  --tw-prose-quote-borders: #a855f7;
+}
+.dark .prose {
+  --tw-prose-body: #cbd5e1;
+  --tw-prose-headings: #f1f5f9;
+  --tw-prose-links: #818cf8;
+  --tw-prose-bold: #f1f5f9;
+  --tw-prose-code: #f472b6;
+  --tw-prose-quotes: #94a3b8;
+  --tw-prose-th-borders: #334155;
+  --tw-prose-td-borders: #1e293b;
+  --tw-prose-hr: #1e293b;
+}
+.prose pre {
+  border-radius: 0.75rem;
+}
+.prose :where(pre code):not(:where([class~="not-prose"] *))::before,
+.prose :where(pre code):not(:where([class~="not-prose"] *))::after {
+  content: none;
+}
