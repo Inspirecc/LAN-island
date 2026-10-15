@@ -14,7 +14,7 @@ export const siteConfig = {
   /** 站点地址(部署后改成你的正式域名,用于 SEO 与 RSS) */
   siteUrl: "https://moonlan.space",
   /** 作者名 */
-  author: "兰俊剑",
+  author: "LAN",
   /** 头像(可换成本地 /avatar.jpg,放 public 目录) */
   avatarUrl: "https://api.dicebear.com/9.x/glass/svg?seed=LANISLAND",
   /** 个性签名 */
