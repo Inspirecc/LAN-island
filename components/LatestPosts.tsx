@@ -1,6 +1,5 @@
 // components/LatestPosts.tsx — 首页最新文章轮播(客户端,自动滚动)
-// 布局方案:CSS Grid 叠层。所有卡片占同一个网格单元,容器高度 = 最高的卡片,
-// 从根本上解决"内容比占位高就被裁切"的问题。
+// 方案:只渲染当前卡片(高度=单张卡片,绝无空白),切换时用 key 触发淡入动画
 "use client";
 
 import Link from "next/link";
@@ -20,6 +19,8 @@ export default function LatestPosts({ posts }: { posts: PostMeta[] }) {
   }, [count]);
 
   if (count === 0) return null;
+
+  const current = posts[index];
 
   return (
     <section className="glass relative overflow-hidden rounded-3xl p-6 sm:p-8">
@@ -47,28 +48,19 @@ export default function LatestPosts({ posts }: { posts: PostMeta[] }) {
         )}
       </div>
 
-      {/* Grid 叠层:同格堆叠,所有卡片结构一致(摘要已在数据层截断),高度稳定 */}
-      <div className="grid">
-        {posts.map((p, i) => (
-          <Link
-            key={p.slug}
-            href={`/posts/${p.slug}`}
-            className={`flex flex-col gap-2 rounded-2xl border border-white/30 bg-white/40 p-5 transition-all duration-500 dark:border-white/5 dark:bg-white/5 ${
-              i === index
-                ? "z-10 translate-y-0 opacity-100"
-                : "pointer-events-none invisible relative z-0 translate-y-3 opacity-0"
-            }`}
-          >
-            <span className="text-xs font-bold text-indigo-500">{p.category}</span>
-            <h3 className="line-clamp-1 text-base font-black transition-colors hover:text-indigo-500">
-              {p.title}
-            </h3>
-            <p className="line-clamp-1 text-sm text-slate-500 dark:text-slate-400">
-              {p.description}
-            </p>
-            <span className="text-xs text-slate-400">{formatDate(p.date)}</span>
-          </Link>
-        ))}
+      {/* key 变化触发重新挂载 → 淡入动画;高度恒等于单张卡片 */}
+      <div key={index} className="animate-fade-up">
+        <Link
+          href={`/posts/${current.slug}`}
+          className="flex flex-col gap-2 rounded-2xl border border-white/30 bg-white/40 p-5 transition-colors hover:border-indigo-400/60 dark:border-white/5 dark:bg-white/5"
+        >
+          <span className="text-xs font-bold text-indigo-500">{current.category}</span>
+          <h3 className="text-base font-black transition-colors hover:text-indigo-500">
+            {current.title}
+          </h3>
+          <p className="text-sm text-slate-500 dark:text-slate-400">{current.description}</p>
+          <span className="text-xs text-slate-400">{formatDate(current.date)}</span>
+        </Link>
       </div>
 
       <div className="mt-4 flex justify-center gap-1.5">
