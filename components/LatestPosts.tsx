@@ -47,7 +47,7 @@ export default function LatestPosts({ posts }: { posts: PostMeta[] }) {
         )}
       </div>
 
-      {/* Grid 叠层:同格堆叠,高度取所有卡片中的最大值,内容永不裁切 */}
+      {/* Grid 叠层:同格堆叠,所有卡片结构一致(摘要已在数据层截断),高度稳定 */}
       <div className="grid">
         {posts.map((p, i) => (
           <Link
@@ -63,7 +63,7 @@ export default function LatestPosts({ posts }: { posts: PostMeta[] }) {
             <h3 className="line-clamp-1 text-base font-black transition-colors hover:text-indigo-500">
               {p.title}
             </h3>
-            <p className="line-clamp-2 text-sm text-slate-500 dark:text-slate-400">
+            <p className="line-clamp-1 text-sm text-slate-500 dark:text-slate-400">
               {p.description}
             </p>
             <span className="text-xs text-slate-400">{formatDate(p.date)}</span>

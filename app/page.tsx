@@ -14,6 +14,13 @@ export default function Home() {
   const tags = getTagMap().slice(0, 12);
   const latest = posts.slice(0, 6);
 
+  // 轮播用:摘要截断到 60 字,保证每张卡片高度一致
+  const carouselPosts = latest.map((p) => ({
+    ...p,
+    description:
+      p.description.length > 60 ? p.description.slice(0, 60) + "…" : p.description,
+  }));
+
   return (
     <div className="flex flex-col gap-6 pb-10">
       {/* 第一行:名片 + 统计 */}
@@ -44,7 +51,7 @@ export default function Home() {
       </div>
 
       {/* 第二行:最新文章轮播 */}
-      <LatestPosts posts={latest} />
+      <LatestPosts posts={carouselPosts} />
 
       {/* 第三行:文章网格 + 标签云侧栏 */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
