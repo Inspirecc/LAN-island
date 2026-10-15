@@ -1,4 +1,6 @@
 // components/LatestPosts.tsx — 首页最新文章轮播(客户端,自动滚动)
+// 布局方案:CSS Grid 叠层。所有卡片占同一个网格单元,容器高度 = 最高的卡片,
+// 从根本上解决"内容比占位高就被裁切"的问题。
 "use client";
 
 import Link from "next/link";
@@ -45,23 +47,16 @@ export default function LatestPosts({ posts }: { posts: PostMeta[] }) {
         )}
       </div>
 
-      {/* 卡片区域:高度自适应,当前条目撑开容器,避免内容被裁掉 */}
-      <div className="relative">
-        {/* 占位:用最长的一条撑出高度(不可见),保证切换时高度稳定 */}
-        <div className="invisible flex flex-col gap-2 rounded-2xl border p-5" aria-hidden>
-          <span className="text-xs font-bold">分类</span>
-          <h3 className="line-clamp-1 text-base font-black">占位标题</h3>
-          <p className="line-clamp-2 text-sm">占位摘要,用于撑出稳定的高度,避免轮播切换时页面跳动。</p>
-          <span className="text-xs">0000-00-00</span>
-        </div>
+      {/* Grid 叠层:同格堆叠,高度取所有卡片中的最大值,内容永不裁切 */}
+      <div className="grid">
         {posts.map((p, i) => (
           <Link
             key={p.slug}
             href={`/posts/${p.slug}`}
-            className={`absolute inset-0 flex flex-col justify-center gap-2 overflow-hidden rounded-2xl border border-white/30 bg-white/40 p-5 transition-all duration-500 dark:border-white/5 dark:bg-white/5 ${
+            className={`flex flex-col gap-2 rounded-2xl border border-white/30 bg-white/40 p-5 transition-all duration-500 dark:border-white/5 dark:bg-white/5 ${
               i === index
                 ? "z-10 translate-y-0 opacity-100"
-                : "pointer-events-none translate-y-3 opacity-0"
+                : "pointer-events-none invisible relative z-0 translate-y-3 opacity-0"
             }`}
           >
             <span className="text-xs font-bold text-indigo-500">{p.category}</span>
