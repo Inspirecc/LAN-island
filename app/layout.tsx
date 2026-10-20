@@ -8,6 +8,7 @@ import AuroraBackground from "@/components/AuroraBackground";
 import EffectLayer from "@/components/EffectLayer";
 import PageTransition from "@/components/PageTransition";
 import SearchTrigger from "@/components/SearchTrigger";
+import MusicPlayer from "@/components/MusicPlayer";
 import { getAllPosts } from "@/lib/posts";
 import "./globals.css";
 
@@ -49,6 +50,7 @@ export default function RootLayout({
                 description: p.description,
               }))}
             />
+            <MusicPlayer />
           </div>
         </ThemeProvider>
       </body>

@@ -46,6 +46,40 @@ export const siteConfig = {
 
   /** 页脚徽章 */
   footerBadges: ["Next.js 16", "Tailwind CSS 4", "Vercel"],
+
+  /** 悬浮音乐播放器 */
+  music: {
+    /** 是否启用 */
+    enabled: true,
+    /** 默认音量 0~1 */
+    defaultVolume: 0.6,
+    /**
+     * 歌单:url 两种写法——
+     * 1. 本地文件:mp3 放进 public/music/ 后写 "/music/xxx.mp3"
+     * 2. 外链:如 SoundHelix 试音曲,或网易云外链 "https://music.163.com/song/media/outer/url?id=歌曲ID.mp3"(仅免费歌曲可用)
+     * 注意:请使用有版权/授权的音乐,不要上传盗版音源
+     */
+    playlist: [
+      {
+        title: "Island Breeze",
+        artist: "SoundHelix",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        cover: "",
+      },
+      {
+        title: "Night Walk",
+        artist: "SoundHelix",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+        cover: "",
+      },
+      {
+        title: "Deep Blue",
+        artist: "SoundHelix",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+        cover: "",
+      },
+    ],
+  },
 } as const;
 
 export type SiteConfig = typeof siteConfig;
